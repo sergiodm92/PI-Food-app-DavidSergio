@@ -1,0 +1,119 @@
+
+.background {
+    position: fixed;
+	width: 100%;
+	height: 100%;
+	margin: 0px  0px ;
+	background-image: url(../../img/imgfood.png);
+    opacity: 1;
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-size: cover;
+   
+
+}
+
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+    
+    
+}
+
+body {
+	background: #e4dfdf;
+	font-family: 'Roboto', sans-serif;
+	min-height: 100vh;
+   
+    
+}
+
+
+h1 {
+	font-size: 60px;
+    width: 800px;
+    margin: 15%;
+	font-weight: 300;
+	text-align: center;
+	margin-bottom: 5px;
+	text-shadow: 5px 2px 2px black;
+
+	color: #e8e1e1;
+	border: 5px solid #f1efef;
+	padding: 1px 1px;
+	display: inline-block;
+  
+}
+
+.contenedor-botones {
+	width: 500px;
+    margin: 10%;
+    
+    padding: 30px;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 10px;
+}
+
+.boton {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	left: 1000px;
+    margin-top: 95%;
+	color: #fff;
+    text-shadow: 5px 2px 2px black;
+	font-family: 'Roboto', sans-serif;
+	font-size: 40px;
+	font-weight: 10;
+	border: none;
+	cursor: pointer;
+	
+	transition: .3s ease all;
+	border-radius: 5px;
+	position: relative;
+	overflow: hidden;
+}
+
+.boton span {
+	position: relative;
+	z-index: 2;
+	transition: .3s ease all;
+}
+
+.boton.seis {
+	background: none;
+	color: rgb(244, 240, 240);
+}
+
+.boton.seis svg {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	fill: none;
+}
+
+.boton.seis rect {
+	width: 100%;
+	height: 100%;
+	stroke: rgb(250, 244, 244);
+	stroke-width: 5px;
+	stroke-dasharray: 1000;
+	stroke-dashoffset: 1000;
+    stroke-opacity: 30%;
+	transition: .6s ease all;
+}
+
+.boton.seis:hover rect {
+	stroke-dashoffset: 0;}
+
+.link{
+    color: transparent;
+	Text-decoration: none;
+}

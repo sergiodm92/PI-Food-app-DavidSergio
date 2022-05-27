@@ -1,0 +1,303 @@
+
+.hometitle{
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-shadow: 5px 5px 5px rgb(242, 240, 236) ;
+  font-style: inherit;
+  font-size: 50px;
+  color:lightseagreen;
+  text-align: center;
+}
+.upperbar{
+  position: relative;
+  align-items: center;
+  justify-content: space-between ;
+  background-color: #b8acac;
+  backface-visibility: hidden;
+  display: flex;
+  border-width: 3px;
+  border-color: #000000;
+  border-style: solid;
+  zoom: 80%;
+}
+.divcreaterecipe{
+  margin: 30px;
+}
+.buttonreset{
+  font-size: 15px;
+  height: 4vh;
+  margin-right: 1.5rem;
+  height: 2.68vw !important;
+  }
+.buttoncreate{
+  font-size: 15px;
+}
+.buttonreset:hover{
+  opacity: 70%;
+  background-color: #5c595b;
+  color: #ebebeb; 
+
+}
+
+.filter-select {
+    width: 15vw !important;
+    height: 3vw !important;
+  }
+ 
+ select option{
+    background-color: #ef523a;
+    letter-spacing: 1.2px;
+    font-weight: 400;
+    font-size: 18px;
+}  
+.selected{
+    display: none;
+}
+
+  .recipes-home {
+    
+     display: grid;
+     grid-template-columns: repeat(3, 1fr);
+     align-items: center;
+   
+  }
+
+  @media (max-width: 768px) {
+    .recipes-home{
+      grid-template-columns: repeat(2, 1fr);
+     ;
+    }
+  }
+  
+  .pagination {
+    margin-top: 10px;
+    display: flex;
+    margin: 300px;
+    transform: translate(250%,300%);
+  }
+
+  .num-page {
+    font-size: 2rem;
+    color: #5c595b;
+    padding-right: 45px;
+    padding-left: 45px;
+  }
+  
+  .div_btn {
+		display: flex;
+	}
+		.btn_page {
+      font-family: 'Rubik', sans-serif;
+      font-weight: 500;
+      background-color: #03810a;
+      border-radius: 10px;
+      cursor: pointer;
+      color: #ffffff;
+      font-size: 1.2em;
+      width: 8vw;
+      height: 7vh;
+		}
+    .btn-page::hover {
+      background-color: #00968c;
+      color: #2ec4b5;
+    }
+    
+  .loading {
+    width: 10vw;
+  }
+  
+  .rotated{
+    animation-name: rotation;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+  }
+  
+  @keyframes rotation {
+    0% {
+      transform:rotateY(0deg);
+    }
+    100% {
+      transform:rotateY(360deg);
+    }
+  }
+  
+.wphome {
+background-image: url(../../img/wpfood.jpg);
+padding-top: 30px;
+}
+
+.divpag{
+display: flex;
+position: relative;
+margin: auto;
+flex:auto;
+justify-content: center;
+}
+.divbuttonbar {
+  display: inline-block;
+  border-radius: 4px;
+  justify-content: center;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 28px;
+  padding: 20px;
+  width: 200px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.divbuttonbar span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.divbuttonbar span:after {
+  content: '\00bb';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.divbuttonbar:hover span {
+  padding-right: 25px;
+}
+
+.divbuttonbar:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+
+.buttonhome, buttonhome::after {
+  width: 100px;
+  height: 50px;
+  font-size: 18px;
+  font-family: 'Bebas Neue', cursive;
+  background: linear-gradient(45deg, transparent 5%, #ff1a0188 5%);
+  border: 0;
+  color: #fff;
+  letter-spacing: 3px;
+  line-height: 20px;
+  box-shadow: 6px 3px 3px #00E6F6;
+  outline: transparent;
+  position: relative;
+}
+
+.buttonhome::after {
+  --slice-0: inset(50% 50% 50% 50%);
+  --slice-1: inset(80% -6px 0 0);
+  --slice-2: inset(50% -6px 30% 0);
+  --slice-3: inset(10% -6px 85% 0);
+  --slice-4: inset(40% -6px 43% 0);
+  --slice-5: inset(80% -6px 5% 0);
+  
+  content: 'AVAILABLE NOW';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, transparent 3%, #00E6F6 3%, #00E6F6 5%, #ff6f01 5%);
+  text-shadow: -3px -3px 0px #05f852, 3px 3px 0px #00E6F6;
+  clip-path: var(--slice-0);
+}
+
+.buttonhome:hover::after {
+  animation: 1s glitch;
+  animation-timing-function: steps(2, end);
+}
+
+@keyframes glitch {
+  0% {
+    clip-path: var(--slice-1);
+    transform: translate(-20px, -10px);
+  }
+  10% {
+    clip-path: var(--slice-3);
+    transform: translate(10px, 10px);
+  }
+  20% {
+    clip-path: var(--slice-1);
+    transform: translate(-10px, 10px);
+  }
+  30% {
+    clip-path: var(--slice-3);
+    transform: translate(0px, 5px);
+  }
+  40% {
+    clip-path: var(--slice-2);
+    transform: translate(-5px, 0px);
+  }
+  50% {
+    clip-path: var(--slice-3);
+    transform: translate(5px, 0px);
+  }
+  60% {
+    clip-path: var(--slice-4);
+    transform: translate(5px, 10px);
+  }
+  70% {
+    clip-path: var(--slice-2);
+    transform: translate(-10px, 10px);
+  }
+  80% {
+    clip-path: var(--slice-5);
+    transform: translate(20px, -10px);
+  }
+  90% {
+    clip-path: var(--slice-1);
+    transform: translate(-10px, 0px);
+  }
+  100% {
+    clip-path: var(--slice-1);
+    transform: translate(0);
+  }
+}
+
+
+select, button::after {
+  width: 150px;
+  height: 50px;
+  font-size: 18px;
+  font-family: 'Bebas Neue', cursive;
+  background: linear-gradient(45deg, transparent 5%, #ff1a0188 5%);
+  border: 0;
+  color: #fff;
+  letter-spacing: 3px;
+  line-height: 20px;
+  box-shadow: 6px 3px 3px #00E6F6;
+  outline: transparent;
+  position: relative;
+}
+
+select::after {
+  --slice-0: inset(50% 50% 50% 50%);
+  --slice-1: inset(80% -6px 0 0);
+  --slice-2: inset(50% -6px 30% 0);
+  --slice-3: inset(10% -6px 85% 0);
+  --slice-4: inset(40% -6px 43% 0);
+  --slice-5: inset(80% -6px 5% 0);
+  
+  content: 'AVAILABLE NOW';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, transparent 3%, #00E6F6 3%, #00E6F6 5%, #ff6f01 5%);
+  text-shadow: -3px -3px 0px #05f852, 3px 3px 0px #00E6F6;
+  clip-path: var(--slice-0);
+}
+
+select:hover::after {
+  animation: 1s glitch;
+  animation-timing-function: steps(2, end);
+}
