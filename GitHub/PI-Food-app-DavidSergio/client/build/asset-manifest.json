@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/static/css/main.9d351d3c.css",
+    "main.js": "/static/js/main.80276162.js",
+    "static/js/787.c8cfafe0.chunk.js": "/static/js/787.c8cfafe0.chunk.js",
+    "static/media/imgfood.png": "/static/media/imgfood.bcf7df8227646e38b6bc.png",
+    "static/media/loading.gif": "/static/media/loading.cad2695b7aa7524cd7ed.gif",
+    "static/media/wpfood.jpg": "/static/media/wpfood.d5f3cdb475c56f4da048.jpg",
+    "static/media/chef.png": "/static/media/chef.a63deb799439ffeae207.png",
+    "static/media/recipe not found.png": "/static/media/recipe not found.5d0c1fb9f3e04ca4e9cc.png",
+    "index.html": "/index.html",
+    "main.9d351d3c.css.map": "/static/css/main.9d351d3c.css.map",
+    "main.80276162.js.map": "/static/js/main.80276162.js.map",
+    "787.c8cfafe0.chunk.js.map": "/static/js/787.c8cfafe0.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.9d351d3c.css",
+    "static/js/main.80276162.js"
+  ]
+}

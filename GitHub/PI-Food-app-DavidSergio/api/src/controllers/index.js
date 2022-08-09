@@ -39,9 +39,13 @@ const recipesApi = async function () {
 
 //      --->COMENTAR SI NO FUNCIONA LA API<---   
 //--------------------------------------------    
-        // const res = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&number=100`)
-        // const recipes = res.data.results;
-//----------------------------------------------
+
+    // const res = await axios.get(`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&addRecipeInformation=true&number=100`)
+    // const recipes = res.data.results;
+
+    //-------------------------------
+
+
 
 
 
@@ -176,6 +180,17 @@ const searchForDiets = async (diet) => {
     return dietsFilter;
 };
 
+const deleteRecipe = async (req, res, next) => {
+    try {
+      const { id } = req.params;
+      const response = await Recipe.destroy({where:{id:id}});
+      res.status(200).send("response");
+    } catch (error) {
+      next({ message: error.name });
+    }
+  };
+
+
 
 module.exports = {
     allRecipes,
@@ -183,5 +198,6 @@ module.exports = {
     recipesDb,
     recipeId,
     setDiets,
-    searchForDiets
+    searchForDiets,
+    deleteRecipe
 }

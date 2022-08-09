@@ -1,10 +1,7 @@
 
 import { Route } from 'react-router-dom';
-
 import './App.css';
-
 import LandingPage from "./components/LandingPage/LandingPage";
-
 import Form from "./components/Form/Form"
 import Details from './components/Details/Details';
 import Home from './components/Home/Home';

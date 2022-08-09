@@ -9,10 +9,14 @@ const GET_RECIPES_NAME = "GET_RECIPES_NAME";
 const GET_RECIPES_ID = "GET_RECIPES_ID";
 const GET_DIETS = "GET_DIETS";
 const GET_RECIPES_FOR_DIET ="GET_RECIPES_FOR_DIET";
-const ORDER_RECIPE_BY_NAME = "ORDER_RECIPE_BY_NAME"
-const ORDER_RECIPE_BY_HSCORE = "ORDER_RECIPE_BY_HSCORE"
-const CREATE_RECIPE = "CREATE_RECIPE"
-const GET_DIET_TYPES ="GET_DIET_TYPES"
+const ORDER_RECIPE_BY_NAME = "ORDER_RECIPE_BY_NAME";
+const ORDER_RECIPE_BY_HSCORE = "ORDER_RECIPE_BY_HSCORE";
+const CREATE_RECIPE = "CREATE_RECIPE";
+const GET_DIET_TYPES ="GET_DIET_TYPES";
+const GET_RECIPES_CREATE = "GET_RECIPES_CREATE";
+const GET_RECIPES_API = "GET_RECIPES_API";
+const DELETE_RECIPES = "DELETE_RECIPES";
+const SWICH_LOADING = "SWICH_LOADING"
 const URL = "http://localhost:3002/";
 
 //-------------------------------
@@ -26,6 +30,7 @@ const URL = "http://localhost:3002/";
 //         })
 //     }
 // }
+
 
 //con promise
 export function getRecipes(){
@@ -55,6 +60,9 @@ export const getRecipesId = (id) => {
         }
     };
 }
+
+
+
 
 export const getDiets = () => {
     return async (dispatch) => {
@@ -139,11 +147,51 @@ export function getRecipesName(name){
                 text: "Recipe not found",
                 icon: recipenotfound,
                 dangerMode: true,
+                buttons: "CLOSE"
               });})
             
         }
     }       
 
+    export function recipesCreate(){
+        return (dispatch)=>{
+            axios.get(`${URL}recipescreate`)
+            .then((response)=>{
+                return dispatch({
+                type:GET_RECIPES_CREATE,
+                payload: response.data
+            })})
+            
+        }
+    }
+
+    export function recipesapi(){
+        return (dispatch)=>{
+            axios.get(`${URL}recipesapi`)
+            .then((response)=>{
+                return dispatch({
+                type:GET_RECIPES_API,
+                payload: response.data
+            })})
+            
+        }
+    }
 
 
-   
+    export function deleteRecipe(id) {
+        return async (dispatch) => {
+          try {
+            const response = await axios.delete(`${URL}recipe/${id}`);
+            if(response)return dispatch(getRecipes())
+            } catch (error) {
+            console.log(error);
+          }
+        };
+      }
+
+
+    export const swich_loading = (e) => {
+ 
+        return ({ type: SWICH_LOADING, payload: e  });
+               
+            };

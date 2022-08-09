@@ -1,6 +1,7 @@
 const { Router } = require("express");
-const { Recipe} = require("../db");
+const {Recipe} = require("../db");
 const {setDiets}= require("../controllers/index")
+const {deleteRecipe} = require("../controllers/index")
 const router = Router();
 
 //
@@ -33,6 +34,8 @@ router.post('/', async (req, res) => {
     return res.status(404).json("ERROR CREATING RECIPE");
   }
 });
+
+router.delete('/:id', deleteRecipe);
 
 
 module.exports = router;

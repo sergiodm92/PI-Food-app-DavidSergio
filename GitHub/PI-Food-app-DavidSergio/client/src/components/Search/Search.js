@@ -1,56 +1,15 @@
-// import React from 'react'
-// import {useState} from 'react';
-// import { useDispatch } from 'react-redux';
-// import {getRecipesName} from '../../actions/index.js';
-
-// import './search.css'
-
-// export default function Search() {
-// 	const dispatch = useDispatch();
-// 	const [title, settitle] = useState('');
-	
-// 	function handleChange(e) {
-// 		settitle(e.target.value);
-// 	}
-
-// 	function handleSubmit(e) {
-// 			e.preventDefault();
-// 			dispatch(getRecipesName(title));
-			
-// 	}
-
-// 	return (
-// 		<React.Fragment>
-			
-// 				<div className='box'>
-// 				<input
-// 					className='input-search'
-// 					type='text'
-// 					placeholder='Search your recipe'
-// 					onChange={(e)=>handleChange(e)}
-// 				/>
-// 				<button 
-// 				className='buttonhome' 
-// 				type='submit' 
-// 				onClick={(e)=>handleSubmit(e)}>
-// 			submit
-// 				</button>
-// 				</div>
-		
-// 		</React.Fragment>
-// 	);
-// }
-
 import React from "react";
-import { useState, useEffect } from "react";
-import { useDispatch } from 'react-redux'; 
-import { getRecipesName} from "../../actions/index";
+import { useState } from "react";
+import { useDispatch, useSelector } from 'react-redux'; 
+import { getRecipesName, swich_loading} from "../../actions/index";
 import './search.css'
 
 
-export default function SearchBar({setCurrentPage}) {
+export default function SearchBar() {
      const dispatch = useDispatch()
      const [name, setName] = useState('')
+     const recipename = useSelector((state)=>state.recipesByName)
+    
 
 
      function handleInputChange(e) {
@@ -58,12 +17,17 @@ export default function SearchBar({setCurrentPage}) {
         setName(e.target.value)
         console.log(name)
     }
+    
 
     function handleSubmit(e) {
         e.preventDefault();
+        if(recipename.length===0)dispatch(swich_loading(true))
+        else dispatch(swich_loading(false))
         dispatch(getRecipesName(name))
+        if(recipename.length===0)dispatch(swich_loading(true))
+        else dispatch(swich_loading(false))
         setName("");
-        setCurrentPage(page=>page=1)
+        
       
        
 
@@ -71,7 +35,10 @@ export default function SearchBar({setCurrentPage}) {
 
 
     return (
+
+         
         <div >
+       
         <form onSubmit={handleSubmit}>
             <input
 			className='input-search'
@@ -81,11 +48,14 @@ export default function SearchBar({setCurrentPage}) {
             value={name}
             />
             {/*<button  onClick={(e)=> handleSubmit(e)} type="submit">Buscar</button> */}
-            <button className='buttonhome' type="submit">🔎</button>
+            <button className='btn-search' type="submit">🔎</button>
         {/* //</div> */}
-
+        
         </form>
-        {getRecipesName(name)}
+        {
+            getRecipesName(name)}
+        
         </div>
+        
     )
 }

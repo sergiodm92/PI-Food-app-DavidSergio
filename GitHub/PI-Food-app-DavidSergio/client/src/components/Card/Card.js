@@ -1,12 +1,16 @@
 
 import React from 'react';
+import swal from 'sweetalert';
 import { Link } from 'react-router-dom';
 import { BsHeartFill, BsHeartHalf, BsHeart} from 'react-icons/bs'
+import {deleteRecipe, getRecipes} from '../../actions/index'
+import {useDispatch, useSelector} from "react-redux";
 
 import './Card.css'
 
 const Card = ({ id, score, healthScore, image, title, diets, readyInMinutes}) => {
     
+    const dispatch = useDispatch();
     let scoreStar = [];
     let scoreHeart = [];
     let scoreStarTotal = [];
@@ -36,14 +40,30 @@ const Card = ({ id, score, healthScore, image, title, diets, readyInMinutes}) =>
 		return arrayDiets.length ? arrayDiets.join(',') : 'not found'
 	}
 
+    const buttonx = function(){
+        if (id.toString().includes("-")) return(<button className='buttonX' onClick={(e)=>{ handleClick(e)}}>x</button>)
+    }
+
+    function handleClick(e){
+        e.preventDefault(); //evita que se recargue y se rompa la pagina
+        dispatch(deleteRecipe(id))
+    }
+        
+
+
+    
     return (
     <div className='container'>
-        <Link className='link' to={`/recipes/${id}`}>
+        
             <div className='card' >
+            <div className='divbutton'>{buttonx()}</div>       
+            
+            <Link className='link' to={`/recipes/${id}`}> 
                 <div className='card-image'>
+                
                 <img src={image} alt="not found" />  
                 </div> 
-
+                
                 <div className='card-text' >
                 <h6 className="titlec">{title}</h6>
 
@@ -57,17 +77,20 @@ const Card = ({ id, score, healthScore, image, title, diets, readyInMinutes}) =>
                         {(healthScore % 10 > 0) && <BsHeartHalf />}
                         {scoreHeartTotal.map(e => <BsHeart />)}
                         <p className='text-stats'>  Health Score:  {healthScore}</p>
-                        <p className='text-stats'>🕐Time: {readyInMinutes} </p>
+                        <p className='text-stats'>🕐Time: {readyInMinutes} minutes</p>
                      
                     </div>
-                   
-                    
+
+
                 </div>
+                </Link>
             </div>
-        </Link>
+       
     </div>
     );
 };
 
 export default Card;
+
+
 

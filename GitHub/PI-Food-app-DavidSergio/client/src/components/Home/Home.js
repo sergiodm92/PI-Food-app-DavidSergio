@@ -1,17 +1,19 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {getRecipes,getRecipesForDiet,orderByName, orderByHScore} from "../../actions/index"
+import {getRecipes,getRecipesForDiet,orderByName, orderByHScore,recipesCreate, recipesapi, swich_loading} from "../../actions/index"
 import {Link} from 'react-router-dom';
 import Card from "../Card/Card";
 import Pagination from "../Pagination/Pagination";
 import Search from "../Search/Search";
+import Loading from '../Loading/Loading';
 import './Home.css';
 
 
 export default function Home(){
     const dispatch = useDispatch();
     const allRecipes = useSelector ((state)=>state.recipes);
+    const SwichL = useSelector ((state)=>state.switchloading)
     const [CurrentPage, setCurrentPage] = useState(1);
     const [RecipesPerPage, setRecipesPerPage] = useState(9);
     const indexOfLastRecipe = (CurrentPage * RecipesPerPage);
@@ -19,18 +21,25 @@ export default function Home(){
     const currentRecipes = allRecipes.slice(indexOfFirstRecipe,indexOfLastRecipe);
     const [order,setorder] = useState ("")
     const [orderscore , setorderscore] = useState(1)
-    
+    const recipescreate = [];
     const pagination = (pageNumber) => {
-        setCurrentPage(pageNumber)}
-        
+        if(pageNumber==="<" )setCurrentPage(CurrentPage-1)
+        else if(pageNumber===">")setCurrentPage(CurrentPage+1)
+        else setCurrentPage(pageNumber)}
+
         useEffect(() => {
-            dispatch(getRecipes())
-            
-                
+            setTimeout(() => {
+                dispatch(getRecipes())  
+            }, 2000);
         }, [dispatch]);
-        
-      
-                     
+
+        useEffect(()=>{
+            setCurrentPage((pag)=> pag = 1)
+        }, [allRecipes])
+
+
+        if(allRecipes.length===0)dispatch(swich_loading(true))
+        else if(allRecipes.length!==0)dispatch(swich_loading(false))    
 
         function handleClick(e){
             e.preventDefault(); //evita que se recargue y se rompa la pagina
@@ -43,7 +52,6 @@ export default function Home(){
             } 
             else{
                 dispatch(getRecipesForDiet(e.target.value))
-                setCurrentPage((pag)=> pag = 1)
             }
         }
 
@@ -71,64 +79,98 @@ export default function Home(){
             }
         }
 
+        function selectcreate(e){
+            if(e.target.value === 'all'){
+                e.preventDefault();
+                dispatch(getRecipes())
+            }
+            else if(e.target.value === 'create'){
+                e.preventDefault();
+                dispatch(recipesCreate())
+                }
+            else if(e.target.value === 'api'){
+                    e.preventDefault();
+                    dispatch(recipesapi())
+                    }}
+
+
+
         return(
             <div className="wphome">
                 <div className="upperbar">
+                    
                     <div className="divbuttonbar">
-                        <Link to='/recipe' className='link'>
-                            <button className="buttonhome" >Create Recipe</button>
-                        </Link> 
-                    </div>
-                    <div className="divbuttonbar">
-                        <select  onChange={e=> orderforName(e)}>
-                            <option value='default'>By name...</option>
-                            <option value='az'>A-Z</option>
-                            <option value='za'>Z-A</option>
+                        <select className="selec" onChange={e=> orderforName(e)}>
+                            <option key = 'default' value='default'>By name...</option>
+                            <option key = 'az' value='az'>A-Z</option>
+                            <option key = 'za' value='za'>Z-A</option>
                         </select>
                     </div>
                     <div className="divbuttonbar">
-                        <select  onChange={e=> orderforHScore(e)}>
-                            <option value='default'>By score...</option>
-                            <option value='best'>Best Score</option>
-                            <option value='worst'>Worst Score</option>
+                        <select className="selec" onChange={e=> orderforHScore(e)}>
+                            <option key = 'default' value='default'>By score...</option>
+                            <option key = 'best' value='best'>Best Score</option>
+                            <option key = 'worst' value='worst'>Worst Score</option>
                         </select>
                     </div>
-                    <h2 className="hometitle">FIND YOUR RECIPE</h2>
+                    <div className="createornotcreate">
+                            <select className="selec" onChange={e=> selectcreate(e)}>
+                            <option key = 'all' value='all'>All</option>
+                            <option key = 'create' value='create'>create</option>
+                            <option key = 'api' value='api'>api</option>
+                            
+                        </select>
+                    </div>
+                  
                     <div className="divbuttonbar">
-                        <select onChange={e=>  filterfordiet(e)}>
-                            <option value='All'>By diet...</option>
-                            <option value='Gluten Free'>Gluten free</option>
-                            <option value='Ketogenic'>Ketogenic</option>
-                            <option value='Vegetarian'>Vegetarian</option>
-                            <option value='lacto ovo vegetarian'>lacto-Ovo-Vegetarian</option>
-                            <option value='Vegan'>Vegan</option>
-                            <option value='Pescatarian'>Pescatarian</option>
-                            <option value='Paleo'>Paleo</option>
-                            <option value='Primal'>Primal</option>
-                            <option value='fodmap friendly'>fodmap-friendly</option>
-                            <option value='Whole 30'>Whole30</option>
+                        <select className="selec" onChange={e=>  filterfordiet(e)}>
+                            <option key = 'All' value='All'>By diet...</option>
+                            <option key = 'Gluten Free' value='Gluten Free'>Gluten free</option>
+                            <option key = 'Ketogenic' value='Ketogenic'>Ketogenic</option>
+                            <option key = 'Vegetarian' value='Vegetarian'>Vegetarian</option>
+                            <option key = 'lacto ovo vegetarian' value='lacto ovo vegetarian'>lacto-Ovo-Vegetarian</option>
+                            <option key = 'Vegan' value='Vegan'>Vegan</option>
+                            <option key = 'Pescatarian' value='Pescatarian'>Pescatarian</option>
+                            <option key = 'Paleo' value='Paleo'>Paleo</option>
+                            <option key = 'Primal' value='Primal'>Primal</option>
+                            <option key = 'fodmap friendly' value='fodmap friendly'>fodmap-friendly</option>
+                            <option key = 'Whole 30' value='Whole 30'>Whole30</option>
                         </select>
                     </div>   
                     <div className="divbuttonbar">
-                        <button className="buttonhome" onClick={(e)=>{handleClick(e)}}>Default</button>
+                        <button className="btn-search" onClick={(e)=>{handleClick(e)}}>Clean 🧹</button>
+                    </div>
+                    <div className="divbuttonbar">
+                        <Link to='/recipe' className='link'>
+                            <button className="btn-search" >Create Recipe</button>
+                        </Link> 
                     </div>
                     <Search
                         setCurrentPage={setCurrentPage}
                     />   
                 </div>
-                <div>
+                
                     <div className="divpag">
-                    
-                        <Pagination className ="pagination"
+                    {SwichL===false ? 
+                        (<Pagination className ="pagination"
                             RecipesPerPag={RecipesPerPage}
                             allRecipes={allRecipes.length}
                             pagination = {pagination}
+                            CurrentPage = {CurrentPage}
                             
-                        />
+                        />) : true
+                    }
                     </div>
                 <div className='recipes-home'>
-				{ currentRecipes ? (currentRecipes.map( e => {
+                { SwichL===true ?  
+                
+                    <div className="loadd">
+                        <Loading/>
+                    </div>
+                
+                    : (currentRecipes.map( e => {
                     return(
+                    <div>
                         <Card   
                             image={e.image} 
                             title={e.title} 
@@ -137,18 +179,17 @@ export default function Home(){
                             diets={e.diets}
                             id={e.id}
                             readyInMinutes={e.readyInMinutes}
-                           
                         />
-                    )
-                })
-				) : (
-					<h6>Recipes not found! Try again.</h6>
-				    )}
-			    </div>
-          
-                        
+                    </div>
                 
-            </div>
+                    
+                    )}))
+              
+                }
+                </div>
+
+            
+        
         </div>
     )
 

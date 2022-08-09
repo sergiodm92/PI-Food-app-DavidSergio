@@ -1,24 +1,31 @@
 import React from "react";
-import './Pagination.css'
+import "./stylePagination.css"
 
 
-
-export default function Pagination({RecipesPerPag, allRecipes, pagination}){
+export default function Pagination({RecipesPerPag, allRecipes, pagination, CurrentPage}){
     const pageNumbers = []
     const reset=false
-    for(let i=1; i<=Math.ceil(allRecipes/RecipesPerPag); i++){
+    const numbers = Math.ceil(allRecipes/RecipesPerPag)
+    for(let i=1; i<= numbers; i++){
         pageNumbers.push(i)
     }
- 
+    pageNumbers.push(">")
+    if(CurrentPage===numbers)pageNumbers.pop()
+    pageNumbers.unshift("<")
+    if(CurrentPage===1)pageNumbers.shift()
+
+
     return(
-        <div className="pagination2">
+        <div className="pagination2" >
                 
                     {   
                         
                         pageNumbers && 
                         pageNumbers.map(Number=>{ return(
+                            
                             <div className="number" key={Number}>
-                            <a onClick={()=>pagination(Number)}>{Number}</a>
+                            <a onClick={()=>pagination(Number)}>
+                            {Number===CurrentPage?(<p className="currentNamber">{Number}</p>):Number} </a>
                             </div>)
                         })}
                 

@@ -1,15 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector  } from 'react-redux';
-import { getRecipesId, getDiets } from '../../actions/index';
+import { getRecipesId } from '../../actions/index';
 import { Link } from 'react-router-dom';
 import chef from '../../img/chef.png';
 import '../Home/Home.css'
 import './details.css'
 import '../Home/Home.css'
+import Loading from '../Loading/Loading';
 
 function Details({
 	match: {
-		params: { id },
+	params: { id },
 	},
 }) {
 	const dispatch = useDispatch();
@@ -22,11 +23,13 @@ useEffect(() => {dispatch(getRecipesId(id))}, [dispatch, id]);
 		<div>
 				    <div className='recipe-container'>
 					<Link to='/home' className='link'>
-					<div className='buttontohome'>
-                    <button className="buttonhome" >Home</button>
+					<div >
+                    <button className="btn-search" >Home</button>
                     </div>
 					</Link>
+					{!recipe? <Loading> </Loading> :
 					<div className="container-div">
+					
 						<div className='divtitledetail'>
 						<p className="detail-title">{recipe.title}</p>
 						</div>
@@ -41,15 +44,15 @@ useEffect(() => {dispatch(getRecipesId(id))}, [dispatch, id]);
 										{recipe.healthScore &&
 											`🍏HealthScore: ${recipe.healthScore}%`}
 									</p>
-									<p className='h3'>🕐Time: {recipe.readyInMinutes} </p>
+									<p className='h3'>🕐Time: {recipe.readyInMinutes+" minutes"} </p>
 								</div>
-								<div className='detail-diets'>
+								<div className='detail-scores'>
                                     {recipe.diets && 
 									recipe.diets.map(d => <h3 className='h3'> 🍜{d} </h3>
                                     )}
 								</div>
 							<div className='detail-recipe'>
-								<p>{recipe.summary && 'Summary'}</p>
+								<p>{recipe.summary && 'Summary:'}</p>
 								<div className='detail-summary'>
 									<p
 										dangerouslySetInnerHTML={{
@@ -57,7 +60,7 @@ useEffect(() => {dispatch(getRecipesId(id))}, [dispatch, id]);
 										}}
 									/>
 								</div>
-								<p>{recipe.instructions && 'Instructions'}</p>
+								<p>{recipe.instructions && 'Instructions:'}</p>
 								<div className='detail-recipe'>
 									<p
 										dangerouslySetInnerHTML={{
@@ -68,6 +71,7 @@ useEffect(() => {dispatch(getRecipesId(id))}, [dispatch, id]);
 							</div>
 						</div>
 						</div>
+					}
 					</div>
 				
 				 

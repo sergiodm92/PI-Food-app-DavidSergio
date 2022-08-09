@@ -51,8 +51,7 @@ h1 {
 .contenedor-botones {
 	width: 500px;
     margin: 10%;
-    
-    padding: 30px;
+     padding: 30px;
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
 	gap: 10px;

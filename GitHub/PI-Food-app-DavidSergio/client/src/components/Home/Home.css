@@ -1,12 +1,12 @@
 
-.hometitle{
+/* .hometitle{
   font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   text-shadow: 5px 5px 5px rgb(242, 240, 236) ;
   font-style: inherit;
   font-size: 50px;
   color:lightseagreen;
   text-align: center;
-}
+} */
 .upperbar{
   position: relative;
   align-items: center;
@@ -19,15 +19,8 @@
   border-style: solid;
   zoom: 80%;
 }
-.divcreaterecipe{
-  margin: 30px;
-}
-.buttonreset{
-  font-size: 15px;
-  height: 4vh;
-  margin-right: 1.5rem;
-  height: 2.68vw !important;
-  }
+
+
 .buttoncreate{
   font-size: 15px;
 }
@@ -38,10 +31,6 @@
 
 }
 
-.filter-select {
-    width: 15vw !important;
-    height: 3vw !important;
-  }
  
  select option{
     background-color: #ef523a;
@@ -53,20 +42,28 @@
     display: none;
 }
 
-  .recipes-home {
+.recipes-home {
     
-     display: grid;
-     grid-template-columns: repeat(3, 1fr);
-     align-items: center;
-   
-  }
+  display: grid;
+  grid-template-columns: repeat(3, 0.5fr);
+  height: 2000px;
+  gap: 10px;
+  justify-items: center;
+}
 
-  @media (max-width: 768px) {
-    .recipes-home{
-      grid-template-columns: repeat(2, 1fr);
-     ;
-    }
-  }
+
+.loadd{
+justify-content: center;
+width: auto;
+height: auto;
+grid-column: 2/2;
+}
+
+.h2loading{
+  justify-content: center;
+  text-align: center;
+}
+
   
   .pagination {
     margin-top: 10px;
@@ -124,12 +121,13 @@
 .wphome {
 background-image: url(../../img/wpfood.jpg);
 padding-top: 30px;
+zoom: 90%;
 }
 
 .divpag{
 display: flex;
 position: relative;
-margin: auto;
+
 flex:auto;
 justify-content: center;
 }
@@ -147,7 +145,12 @@ justify-content: center;
   cursor: pointer;
   margin: 5px;
 }
-
+.selec{
+  cursor: pointer;
+}
+.selec:hover {
+  box-shadow:none;
+}
 .divbuttonbar span {
   cursor: pointer;
   display: inline-block;
@@ -175,7 +178,7 @@ justify-content: center;
 
 
 .buttonhome, buttonhome::after {
-  width: 100px;
+  /* width: 100px; */
   height: 50px;
   font-size: 18px;
   font-family: 'Bebas Neue', cursive;
@@ -208,6 +211,8 @@ justify-content: center;
   text-shadow: -3px -3px 0px #05f852, 3px 3px 0px #00E6F6;
   clip-path: var(--slice-0);
 }
+
+
 
 .buttonhome:hover::after {
   animation: 1s glitch;
